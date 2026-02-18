@@ -26,7 +26,6 @@ function fakeS3NoSuchKey(request) {
 
   const url = new URL(request.url);
 
-  // ===== 自建桶名策略 =====
   const bucket = "admin-bucket";   // 或写死：const bucket = "my-static-bucket";
 
   const key = url.pathname.slice(1) || "";
