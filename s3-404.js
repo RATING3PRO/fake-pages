@@ -25,10 +25,7 @@ function randomBase64(len) {
 function fakeS3NoSuchKey(request) {
 
   const url = new URL(request.url);
-
-  const bucket = "admin-bucket";   // 或写死：const bucket = "my-static-bucket";
-
-  const key = url.pathname.slice(1) || "";
+  const bucket = "admin-bucket";
 
   const requestId = randomHex(16);
   const hostId = randomBase64(104);
@@ -37,7 +34,6 @@ function fakeS3NoSuchKey(request) {
 <Error>
   <Code>NoSuchKey</Code>
   <Message>The specified key does not exist.</Message>
-  <Key>${key}</Key>
   <BucketName>${bucket}</BucketName>
   <RequestId>${requestId}</RequestId>
   <HostId>${hostId}</HostId>
