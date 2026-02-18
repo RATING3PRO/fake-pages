@@ -33,7 +33,7 @@ function fakeS3NoSuchKey(request) {
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <Error>
   <Code>NoSuchKey</Code>
-  <Message>The specified key does not exist.</Message>
+  <Message>The specified key does not exist</Message>
   <BucketName>${bucket}</BucketName>
   <RequestId>${requestId}</RequestId>
   <HostId>${hostId}</HostId>
