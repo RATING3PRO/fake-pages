@@ -5,7 +5,7 @@ export default {
 };
 
 function randomHex(len) {
-  const chars = "abcdef0123456789";
+  const chars = "0123456789ABCDEF";
   let out = "";
   for (let i = 0; i < len; i++) {
     out += chars[Math.floor(Math.random() * chars.length)];
@@ -19,22 +19,27 @@ function randomBase64(len) {
   for (let i = 0; i < len; i++) {
     out += chars[Math.floor(Math.random() * chars.length)];
   }
-  return out;
+  return out + "=";
 }
 
 function fakeS3NoSuchKey(request) {
 
   const url = new URL(request.url);
+
+  // ===== 自建桶名策略 =====
+  const bucket = "admin-bucket";   // 或写死：const bucket = "my-static-bucket";
+
   const key = url.pathname.slice(1) || "";
 
-  const requestId = randomHex(16).toUpperCase();
-  const hostId = randomBase64(64);
+  const requestId = randomHex(16);
+  const hostId = randomBase64(104);
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <Error>
   <Code>NoSuchKey</Code>
   <Message>The specified key does not exist.</Message>
   <Key>${key}</Key>
+  <BucketName>${bucket}</BucketName>
   <RequestId>${requestId}</RequestId>
   <HostId>${hostId}</HostId>
 </Error>`;
