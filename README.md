@@ -1,2 +1,2 @@
 # fake-pages
-some fake page on cloudflare worker
+some fake page runs on cloudflare worker
